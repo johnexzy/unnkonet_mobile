@@ -1,12 +1,14 @@
 // import 'package:UNNKONET/screen/test.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:UNNKONET/screen/webview.dart';
 import 'package:UNNKONET/style.dart';
-import 'datum.dart';
+import 'datumcom.dart';
 import 'package:flutter/cupertino.dart';
 import 'screen/image_banner.dart';
 import 'screen/testmain.dart';
+import 'style.dart';
 
 class Details extends StatefulWidget {
   final List list;
@@ -24,7 +26,6 @@ class _DetailsState extends State<Details> {
     Datum data = widget.list[widget.index];
 
     return CupertinoApp(
-      
       debugShowCheckedModeBanner: false,
       title: data.headline,
       home: CupertinoPageScaffold(
@@ -32,7 +33,7 @@ class _DetailsState extends State<Details> {
             transitionBetweenRoutes: true,
             automaticallyImplyLeading: true,
             previousPageTitle: 'back',
-            middle: Text(data.headline),
+            middle: Text(data.headline, style: TextStyle(fontSize: 16.0)),
           ),
           child: Scaffold(
             body: Container(
@@ -43,11 +44,40 @@ class _DetailsState extends State<Details> {
 
                   children: <Widget>[
                     ImageBanner(
-                            data.uploads,
+                        data.uploads,
                         0, //Border Top Radius of the Image
                         0 //Border Bottom Radius of the Image
                         ),
                     TextSection(Colors.transparent, data.headline, data.body),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Divider(),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.comments),
+                            Text("COMMENTS")
+                          ],
+                        ),
+                        ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Text(data.comments[index].comments)
+                              ],
+                            );  
+                          }, itemCount: 5,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return Divider();
+                          },
+                          
+                        )
+                      ],
+                    )
                   ]),
             ),
             bottomNavigationBar: Container(
@@ -65,17 +95,19 @@ class _DetailsState extends State<Details> {
                   ),
                   color: Colors.red,
                   onPressed: () {
-                                  _lauchURL("https://unnkonet.com.ng/views/news/view.php?id=" +
-                                      data.id);
+                    _lauchURL(
+                        "https://unnkonet.com.ng/views/news/view.php?id=" +
+                            data.id);
                   },
                 )),
           )),
     );
   }
-  _lauchURL(String url) async{
+
+  _lauchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
-    }else{
+    } else {
       throw 'Could not Open $url';
     }
   }

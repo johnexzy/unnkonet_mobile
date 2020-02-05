@@ -1,6 +1,6 @@
 import 'dart:ui';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:UNNKONET/screen/image_banner.dart';
-import 'package:UNNKONET/screen/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:UNNKONET/style.dart';
 
@@ -45,10 +45,8 @@ class TestString extends StatelessWidget {
                 fontSize: 20),
           ),
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MyWebView(
-                      selectedUrl: urla,
-                    )));
+                    _lauchURL(urla);
+                  
           },
         ),
       );
@@ -86,5 +84,11 @@ class TestString extends StatelessWidget {
     );
   }
   //NewString = str.toString().contains('<br>');
-
+   _lauchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not Open $url';
+    }
+  }
 }

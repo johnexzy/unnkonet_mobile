@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'screen/image_banner.dart';
 import 'style.dart';
 import 'datum.api.dart';
-import 'datum.dart';
+import 'datumcom.dart';
 import 'details.dart';
 
 class Body extends StatefulWidget {
@@ -15,17 +15,17 @@ class Body extends StatefulWidget {
   _Body createState() => _Body(category);
 }
 
-class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body>{
+class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
   final String cat;
-  
+
   _Body(this.cat);
   Future<List<Datum>> _future;
   @override
   void initState() {
-     super.initState();
+    super.initState();
     _future = fetchData(cat);
-    
   }
+
   @override
   bool get wantKeepAlive => true;
   @override
@@ -33,7 +33,6 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body>{
     super.build(context);
     return Container(
       child: FutureBuilder(
-        
         future: _future,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -50,16 +49,14 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body>{
                     elevation: 4.0,
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(12), 
-                        bottom: Radius.circular(0),
-                        )),
+                        borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(12),
+                      bottom: Radius.circular(0),
+                    )),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        ImageBanner(datum.uploads,
-                            12,
-                            0),
+                        ImageBanner(datum.uploads, 12, 0),
                         Padding(
                           padding:
                               EdgeInsets.symmetric(vertical: 0, horizontal: 15),
@@ -70,13 +67,16 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body>{
                                 children: <Widget>[
                                   Icon(
                                     Icons.create,
-                                    size: CTS+4.0,
+                                    size: CTS + 4.0,
                                   ),
-                                  Text(": " + datum.writer, style: CaptionTextStyle,),
+                                  Text(
+                                    ": " + datum.writer,
+                                    style: CaptionTextStyle,
+                                  ),
                                 ],
                               ),
                               Row(children: <Widget>[
-                                Icon(Icons.access_time, size: CTS+4.0),
+                                Icon(Icons.access_time, size: CTS + 4.0),
                                 Text(
                                   ": " +
                                       datum.dateofpost.substring(6, 8) +
@@ -116,8 +116,7 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body>{
             children: <Widget>[
               Text("Connecting..."),
               Divider(),
-              CircularProgressIndicator(
-              )
+              CircularProgressIndicator()
             ],
           ));
         },

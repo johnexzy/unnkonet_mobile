@@ -1,9 +1,9 @@
-import 'datum.dart';
+import 'datumcom.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<Datum>> fetchData(String category) async{
   
-  var url = 'https://unnkonet.com.ng/views/news/api.php?category=$category';
+  var url = 'https://unnkonet.com.ng/views/news/apicomment.php?category=$category';
   final response = await http.get(url);
   if (response.statusCode == 200) {
     return datumFromJson(response.body);
