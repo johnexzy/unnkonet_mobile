@@ -1,3 +1,4 @@
+import 'package:UNNKONET/logic/dateString.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'screen/image_banner.dart';
@@ -44,6 +45,7 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                 // return Text('${datum.headline}');
                 //bool isliked = true;
                 // bool isLiked = false;
+                CheckDate datestr = new CheckDate(datum.timestamps);
                 return GestureDetector(
                   child: Card(
                     elevation: 4.0,
@@ -77,13 +79,7 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                               ),
                               Row(children: <Widget>[
                                 Icon(Icons.access_time, size: CTS + 4.0),
-                                Text(
-                                  ": " +
-                                      datum.dateofpost.substring(6, 8) +
-                                      "-" +
-                                      datum.dateofpost.substring(4, 6) +
-                                      "-" +
-                                      datum.dateofpost.substring(0, 4),
+                                Text(datestr.computeDateString(),
                                   style: CaptionTextStyle,
                                 ),
                               ]),

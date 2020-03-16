@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -87,23 +89,31 @@ class _MyHomePageState extends State<MyHomePage> {
           drawer: DrawerApp(),
           bottomNavigationBar: BottomAppBar(
             color: konetblue,
-            child: TabBar(tabs: [
+            child: TabBar(
+              labelPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              tabs: [
               
               Tab(
-                icon: Icon(FontAwesomeIcons.book),
+                icon: Icon(FontAwesomeIcons.newspaper, size: 18,),
+                child: Text( "NEWS", style: TextStyle(fontSize:9),),
               ),
               Tab(
-                icon: Icon(Icons.live_tv),
+                icon: Icon(FontAwesomeIcons.tv, size: 18,),
+                child: Text( "ENTERTAINMENT", style: TextStyle(fontSize:9),),
+
               ),
               Tab(
-                icon: Icon(Icons.home),
+                icon: Icon(FontAwesomeIcons.home, size: 18,),
+                child: Text( "HOME", style: TextStyle(fontSize:9),),
               ),
               Tab(
-                icon: Icon(Icons.stars),
+                icon: Icon(FontAwesomeIcons.solidFutbol, size: 18,),
+                child: Text( "SPORTS", style: TextStyle(fontSize:9),),
               ),
 
               Tab(
-                icon: Icon(Icons.code),
+                icon: Icon(FontAwesomeIcons.code, size: 18,),
+                child: Text( "TECH", style: TextStyle(fontSize:9),),
               ),
               //Tab(text: 'BIRTHDAY'),
             ]),

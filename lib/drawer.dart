@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:UNNKONET/screen/webview.dart';
 import 'package:UNNKONET/style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'body.ent.dart';
 
@@ -41,10 +41,9 @@ class DrawerApp extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => MyWebView(
-                                  selectedUrl: "https://unnkonet.com.ng",
-                                )));
+                        Navigator.of(context).push( _lauchURL(
+                                  "https://unnkonet.com.ng",
+                                ));
                       },
                     ),
                   ),
@@ -77,10 +76,9 @@ class DrawerApp extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => MyWebView(
-                                  selectedUrl: "https://unnkonet.com.ng/myquiz",
-                                )));
+                        Navigator.of(context).push(_lauchURL(
+                                  "https://unnkonet.com.ng/myquiz",
+                                ));
                       },
                     ),
                   ),
@@ -95,11 +93,9 @@ class DrawerApp extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => MyWebView(
-                                  selectedUrl:
+                        Navigator.of(context).push(_lauchURL(
                                       "https://unnkonet.com.ng/pricing.php",
-                                )));
+                                ));
                       },
                     ),
                   ),
@@ -114,11 +110,9 @@ class DrawerApp extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) => MyWebView(
-                                    selectedUrl:
+                          Navigator.of(context).push(_lauchURL(
                                         "https://unnkonet.com.ng/about.html",
-                                  )));
+                                  ));
                         }),
                     color: Colors.white70,
                     //height: 80.0,
@@ -134,11 +128,9 @@ class DrawerApp extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => MyWebView(
-                                  selectedUrl:
+                        Navigator.of(context).push(_lauchURL(
                                       "https://unnkonet.com.ng/team.php",
-                                )));
+                                ));
                       },
                     ),
                   ),
@@ -157,11 +149,9 @@ class DrawerApp extends StatelessWidget {
                         ),
                         color: Colors.red,
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) => MyWebView(
-                                    selectedUrl:
+                          Navigator.of(context).push(_lauchURL(
                                         "https://unnkonet.com.ng/contact.html",
-                                  )));
+                                  ));
                         },
                       )),
                 ],
@@ -169,5 +159,12 @@ class DrawerApp extends StatelessWidget {
             ))
           ],
         ));
+  }
+  _lauchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not Open $url';
+    }
   }
 }

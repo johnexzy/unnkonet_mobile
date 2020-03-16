@@ -34,7 +34,6 @@ const CaptionTextStyle = TextStyle(
   fontSize: CTS+4.0,
   color: Colors.black
 );
-
 Color black() => Colors.black;
 const Body1TextStyle = TextStyle(
   fontFamily: FontName,
