@@ -67,19 +67,34 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                             children: <Widget>[
                               Row(
                                 children: <Widget>[
-                                  Icon(
-                                    Icons.create,
-                                    size: CTS + 4.0,
+                                  Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.create,
+                                        size: CTS + 4.0,
+                                      ),
+                                      Text(
+                                        ": " + datum.writer,
+                                        style: CaptionTextStyle,
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    ": " + datum.writer,
-                                    style: CaptionTextStyle,
-                                  ),
+                                  Row(children: <Widget>[
+                                    Icon(
+                                      Icons.comment,
+                                      size: CTS + 4.0,
+                                    ),
+                                    Text(
+                                        "(" + datum.writer + ")",
+                                        style: CaptionTextStyle,
+                                      ),
+                                  ])
                                 ],
                               ),
                               Row(children: <Widget>[
                                 Icon(Icons.access_time, size: CTS + 4.0),
-                                Text(datestr.computeDateString(),
+                                Text(
+                                  datestr.computeDateString(),
                                   style: CaptionTextStyle,
                                 ),
                               ]),

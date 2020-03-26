@@ -1,4 +1,4 @@
-import 'package:UNNKONET/screen/test.dart';
+import 'package:UNNKONET/logic/testWithVid.dart';
 import 'package:flutter/material.dart';
 import '../style.dart';
 
