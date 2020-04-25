@@ -19,147 +19,177 @@ class DrawerApp extends StatelessWidget {
               fit: BoxFit.cover,
               filterQuality: FilterQuality.low,
             ),
-            Divider(
-              color: black(),
-            ),
-            Center(
+            Container(
+                color: konetred,
                 child: GestureDetector(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  //Padding(
-                  //padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    child: GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: ListTile(
-                          leading: Icon(Icons.home),
-                          title: Text("HOME"),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push( _lauchURL(
-                                  "https://unnkonet.com.ng",
-                                ));
-                      },
-                    ),
-                  ),
-                  
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    child: GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: ListTile(
-                          leading: Icon(Icons.tv),
-                          title: Text("SPONSORED POSTS"),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                Entertainment("advert")));
-                      },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    child: GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: ListTile(
-                          leading: Icon(Icons.tv),
-                          title: Text("MY QUIZ"),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push(_lauchURL(
-                                  "https://unnkonet.com.ng/myquiz",
-                                ));
-                      },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    child: GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: ListTile(
-                          leading: Icon(Icons.shopping_cart),
-                          title: Text("ADVERT PACKAGES"),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push(_lauchURL(
-                                      "https://unnkonet.com.ng/pricing.php",
-                                ));
-                      },
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: GestureDetector(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          child: ListTile(
-                            leading: Icon(Icons.info_outline),
-                            title: Text("ABOUT UNKONET"),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      FlatButton(
+                        focusColor: konetblue,
+                        // highlightColor: konetblue,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.home,
+                                color: konetblue,
+                              ),
+                              title: Text("HOME"),
+                            ),
                           ),
                         ),
-                        onTap: () {
-                          Navigator.of(context).push(_lauchURL(
-                                        "https://unnkonet.com.ng/about.html",
-                                  ));
-                        }),
-                    color: Colors.white70,
-                    //height: 80.0,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    child: GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: ListTile(
-                          leading: Icon(Icons.group),
-                          title: Text("UNNKONET TEAM"),
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).push(_lauchURL(
-                                      "https://unnkonet.com.ng/team.php",
-                                ));
-                      },
-                    ),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: 10),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                      child: RaisedButton(
-                        child: Text(
-                          "CONTACT UNNKONET",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                              fontFamily: FontName),
-                        ),
-                        color: Colors.red,
                         onPressed: () {
                           Navigator.of(context).push(_lauchURL(
-                                        "https://unnkonet.com.ng/contact.html",
-                                  ));
+                            "https://unnkonet.com.ng",
+                          ));
                         },
-                      )),
-                ],
-              ),
-            ))
+                      ),
+                      //Padding(
+                      //padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+
+                      Divider(
+                        height: 15.0,
+                      ),
+                      FlatButton(
+                        focusColor: konetblue,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.tv,
+                                color: konetblue,
+                              ),
+                              title: Text("SPONSORED POSTS"),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  Entertainment("advert")));
+                        },
+                      ),
+
+                      Divider(
+                        height: 15.0,
+                      ),
+                      // Hero(child: ,),
+                      FlatButton(
+                        focusColor: konetblue,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.shopping_cart,
+                                color: konetblue,
+                              ),
+                              title: Text("ADVERT PACKAGES"),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(_lauchURL(
+                            "https://unnkonet.com.ng/pricing.php",
+                          ));
+                        },
+                      ),
+                      Divider(
+                        height: 15.0,
+                      ),
+                      FlatButton(
+                        focusColor: konetblue,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.info_outline,
+                                color: konetblue,
+                              ),
+                              title: Text("ABOUT UNKONET"),
+                            ),
+                          ),
+                          //color: Colors.white70,
+                          //height: 80.0,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(_lauchURL(
+                            "https://unnkonet.com.ng/about.html",
+                          ));
+                        },
+                      ),
+
+                      Divider(
+                        height: 15.0,
+                      ),
+                      FlatButton(
+                        focusColor: konetblue,
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.group,
+                                color: konetblue,
+                              ),
+                              title: Text("UNNKONET TEAM"),
+                            ),
+                          ),
+                          //color: Colors.white70,
+                          //height: 80.0,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(_lauchURL(
+                            "https://unnkonet.com.ng/team.php",
+                          ));
+                        },
+                      ),
+
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(top: 10),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                          child: RaisedButton(
+                            child: Text(
+                              "CONTACT UNNKONET",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  fontFamily: FontName),
+                            ),
+                            color: Colors.red,
+                            onPressed: () {
+                              Navigator.of(context).push(_lauchURL(
+                                "https://unnkonet.com.ng/contact.html",
+                              ));
+                            },
+                          )),
+                    ],
+                  ),
+                ))
           ],
         ));
   }
+
   _lauchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);

@@ -45,6 +45,7 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                 // return Text('${datum.headline}');
                 //bool isliked = true;
                 // bool isLiked = false;
+                //print(datum.numComments);
                 CheckDate datestr = new CheckDate(datum.timestamps);
                 return GestureDetector(
                   child: Card(
@@ -66,6 +67,7 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   Row(
                                     children: <Widget>[
@@ -79,16 +81,7 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                                       ),
                                     ],
                                   ),
-                                  Row(children: <Widget>[
-                                    Icon(
-                                      Icons.comment,
-                                      size: CTS + 4.0,
-                                    ),
-                                    Text(
-                                        "(" + datum.writer + ")",
-                                        style: CaptionTextStyle,
-                                      ),
-                                  ])
+                                  
                                 ],
                               ),
                               Row(children: <Widget>[
@@ -98,8 +91,10 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                                   style: CaptionTextStyle,
                                 ),
                               ]),
+                              
                             ],
                           ),
+                          
                         ),
                         Container(
                           child: Text(
@@ -108,6 +103,20 @@ class _Body extends State<Body> with AutomaticKeepAliveClientMixin<Body> {
                           ),
                           padding: EdgeInsets.fromLTRB(10, 1, 0, 12),
                           color: Colors.transparent,
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                          child:Row(children: <Widget>[
+                                    Icon(
+                                      Icons.comment,
+                                      size: CTS + 4.0,
+                                    ),
+                                    Text(
+                                        "(" + datum.numComments.toString() + ")",
+                                        style: CaptionTextStyle,
+                                      ),
+                                  ]),
                         ),
                         Divider(
                           thickness: 5.0,
