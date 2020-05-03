@@ -36,8 +36,8 @@ class Datum {
   factory Datum.fromMap(Map<String, dynamic> json) => Datum(
         id: json["id"],
         headline: json["headline"],
-        uploads: 'https://unnkonet.com.ng/admin/homepages/' + json["uploads"],
-        //  uploads: 'http://10.0.2.2/www/version/admin/homepages/' + json["uploads"],
+        // uploads: 'https://unnkonet.com.ng/admin/homepages/' + json["uploads"],
+        uploads: 'http://10.0.2.2/www/version/admin/homepages/' + json["uploads"],
         body: json["body"],
         tag: json["tag"],
         category: json["category"],

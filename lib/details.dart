@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 // import 'package:UNNKONET/screen/webview.dart';
 import 'package:UNNKONET/style.dart';
 import 'datumcom.dart';
+import 'datum.api.dart';
 import 'package:flutter/cupertino.dart';
 import 'screen/image_banner.dart';
 import 'screen/testmain.dart';
@@ -25,13 +26,19 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
+  String err = "";
+  Future _futureCom;
+  TextEditingController fname = new TextEditingController();
+  TextEditingController lname = new TextEditingController();
+
+  bool isLiked = true;
+
   @override
   Widget build(BuildContext context) {
     Datum data = widget.list[widget.index];
+    List<Widget> commen = [];
     List<Comment> comm = data.comments;
     int len = comm.length;
-    bool isLiked = true;
-    List<Widget> commen = [];
     if (len > 0) {
       for (Comment m in comm) {
         print(m.comments);
@@ -135,68 +142,153 @@ class _DetailsState extends State<Details> {
             middle: Text(data.headline, style: TextStyle(fontSize: 16.0)),
           ),
           child: Scaffold(
-            body: ListView(
-                children: <Widget>[
-                  ImageBanner(
-                      data.uploads,
-                      0, //Border Top Radius of the Image
-                      0 //Border Bottom Radius of the Image
+            body: ListView(children: <Widget>[
+              ImageBanner(
+                  data.uploads,
+                  0, //Border Top Radius of the Image
+                  0 //Border Bottom Radius of the Image
+                  ),
+              // Row(
+              //   children: <Widget>[
+              //     IconButton(
+              //         icon: Icon(isLiked
+              //             ? Icons.favorite_border
+              //             : Icons.favorite),
+              //         onPressed: () => setState(() {
+              //               isLiked ? isLiked = false : isLiked = true;
+              //             })),
+              //     IconButton(
+              //         color: Colors.red,
+              //         icon: Icon(isLiked
+              //             ? FontAwesomeIcons.thumbsUp
+              //             : Icons.favorite),
+              //         onPressed: () => setState(() {
+              //               isLiked ? isLiked = false : isLiked = true;
+              //             })),
+              //   ],
+              // ),
+              TextSection(Colors.transparent, data.headline, data.body),
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.create,
+                        size: CTS + 4.0,
                       ),
-                  // Row(
-                  //   children: <Widget>[
-                  //     IconButton(
-                  //         icon: Icon(isLiked
-                  //             ? Icons.favorite_border
-                  //             : Icons.favorite),
-                  //         onPressed: () => setState(() {
-                  //               isLiked ? isLiked = false : isLiked = true;
-                  //             })),
-                  //     IconButton(
-                  //         color: Colors.red,
-                  //         icon: Icon(isLiked
-                  //             ? FontAwesomeIcons.thumbsUp
-                  //             : Icons.favorite),
-                  //         onPressed: () => setState(() {
-                  //               isLiked ? isLiked = false : isLiked = true;
-                  //             })),
-                  //   ],
-                  // ),
-                  TextSection(Colors.transparent, data.headline, data.body),
-                  Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                          child:
-                  Row(
-                                    children: <Widget>[
-                                      
-                                      Icon(
-                                        Icons.create,
-                                        size: CTS + 4.0,
-                                      ),
-                                      Text(
-                                        ": " + data.writer,
-                                        style: CaptionTextStyle,
-                                      ),
-                                    ],
-                                  )),
-                  SizedBox(
-                    height: 20,
+                      Text(
+                        ": " + data.writer,
+                        style: CaptionTextStyle,
+                      ),
+                    ],
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(),
+              Card(
+                child: SingleChildScrollView(
+                  controller: null,
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        err,
+                        style: TextStyle(color: Colors.red),
+                        textAlign: TextAlign.left,
+                      ),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 12),
+                          child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Your Name",
+                                  style: Theme.of(context).textTheme.caption,
+                                  textAlign: TextAlign.left,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(hintText: "Name"),
+                                  controller: fname,
+                                  enableSuggestions: true,
+                                  autocorrect: true,
+                                )
+                              ])),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 12),
+                          child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Your Comment",
+                                  style: Theme.of(context).textTheme.caption,
+                                  textAlign: TextAlign.left,
+                                ),
+                                TextField(
+                                  decoration:
+                                      InputDecoration(hintText: "Write Here"),
+                                  controller: lname,
+                                  enableSuggestions: true,
+                                  autocorrect: true,
+                                )
+                              ])),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 65),
+                        child: RaisedButton(
+                          color: konetblue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(7))),
+                          elevation: 6.0,
+                          child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.send,
+                                  color: Colors.white,
+                                )
+                              ]),
+                          onPressed: () {
+                            if (fname.text != "" && lname.text != "") {
+                              print("not empty");
+                              setState(() {
+                                err = "";
+                                _futureCom =
+                                    postCom(data.tag, fname.text, lname.text);
+                              });
+                            } else {
+                              print("Fields cannot be empty");
+                              setState(() {
+                                err = "Fields cannot be empty";
+                              });
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  Divider(),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(FontAwesomeIcons.comments),
-                        Text(
-                          " COMMENTS ($len)",
-                          style: CaptionTextStyle,
-                        )
-                      ]),
-                  Divider(),
-                  Column(
-                    children: commen,
-                  ),
-                ]),
+                ),
+              ),
+
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.comments),
+                    Text(
+                      " COMMENTS ($len)",
+                      style: CaptionTextStyle,
+                    )
+                  ]),
+              Divider(),
+              Column(
+                children: commen,
+              ),
+            ]),
             bottomNavigationBar: Container(
                 constraints: BoxConstraints.tightFor(width: 200),
                 margin: EdgeInsets.only(top: 20),

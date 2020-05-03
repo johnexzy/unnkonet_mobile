@@ -50,33 +50,19 @@ class CheckDate {
   }
 
   //get all components of the datestimestamp
-  getDay() {
-    return _timeof.day;
-  }
+  getDay() => _timeof.day;
 
-  getWeekDay() {
-    return _timeof.weekday;
-  }
+  getWeekDay() => _timeof.weekday;
 
-  getMonth() {
-    return _timeof.month;
-  }
+  getMonth() => _timeof.month;
 
-  getYear() {
-    return _timeof.year;
-  }
+  getYear() => _timeof.year;
 
-  getHour() {
-    return _timeof.hour;
-  }
+  getHour() => _timeof.hour;
 
-  getMin() {
-    return _timeof.minute;
-  }
+  getMin() => _timeof.minute;
 
-  getSecs() {
-    return _timeof.second;
-  }
+  getSecs() => _timeof.second;
 
   computeDateString() {
     nowd = DateTime.now().day;

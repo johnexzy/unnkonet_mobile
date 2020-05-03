@@ -28,7 +28,7 @@ class Datum {
     factory Datum.fromMap(Map<String, dynamic> json) => Datum(
         id: json["id"],
         header: json["header"],
-        image: 'https://unnkonet.com.ng/admin/homepages/' + json["image"],
+        image: 'http://10.0.2.2/www/version/admin/homepages/' + json["image"],
         body: json["body"],
         tag: json["tag"],
         current: json["current"],
