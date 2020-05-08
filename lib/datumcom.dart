@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'comment.model.dart';
+
 List<Datum> datumFromJson(String str) =>
     List<Datum>.from(json.decode(str).map((x) => Datum.fromMap(x)));
 
@@ -43,7 +45,7 @@ class Datum {
         category: json["category"],
         dateofpost: json["Dateofpost"],
         writer: json["Writer"],
-        numComments: json["NumComments"],
+        numComments: List<Comment>.from(json["comments"].map((x) => Comment.fromMap(x))).length,
         timestamps: DateTime.parse(json["timestamps"]),
         comments:
             List<Comment>.from(json["comments"].map((x) => Comment.fromMap(x))),
@@ -62,37 +64,4 @@ class Datum {
         "timestamps": timestamps.toIso8601String(),
         "comments": List<dynamic>.from(comments.map((x) => x.toMap())),
       };
-}
-
-class Comment {
-  String id;
-  String tag;
-  String names;
-  String comments;
-  DateTime timeat;
-
-  Comment({
-    this.id,
-    this.tag,
-    this.names,
-    this.comments,
-    this.timeat,
-  });
-
-  factory Comment.fromMap(Map<String, dynamic> json) => Comment(
-        id: json["id"],
-        tag: json["tag"],
-        names: json["names"],
-        comments: json["comments"],
-        timeat: DateTime.parse(json["Timeat"]),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "tag": tag,
-        "names": names,
-        "comments": comments,
-        "Timeat": timeat.toIso8601String(),
-      };
-      
 }
